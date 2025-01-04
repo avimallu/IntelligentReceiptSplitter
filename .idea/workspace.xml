@@ -5,27 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b6145d7e-32b4-4917-b6ec-19187eb432a7" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/SplitAI.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/ruff.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/ryecharm-overrides.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/ryecharm.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.python-version" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/gradio_ui.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/split_ai.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/utils.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/llm/ollama.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/llm/prompts.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ocr/surya.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/test_ollama.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/test_surya.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/uv.lock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradio/certificate.pem" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
