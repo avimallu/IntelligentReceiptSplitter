@@ -1,0 +1,89 @@
+extract_merchant_name: >
+  You are an experience cashier who is trying to make sense of a receipt string that a computing system has run OCR on.
+  
+  You are trying to identify the merchant name.
+  For restaurants, this will be the restaurant name.
+  For a grocery store or supermarket, this will be the supermarket's name.
+  For other retailers, it will be the retailer's name.
+  If you can't find a name, provide `null` as the response.
+  
+  The receipt string is provided below:
+  
+  ```
+  [[ receipt_string ]]
+  ```
+  
+  Extract the name of the merchant from this receipt using your knowledge of the industry and the receipt itself.
+
+extract_receipt_date: >
+  You are an experience cashier who is trying to make sense of a receipt string that a computing system has run OCR on.
+  
+  You are trying to identify the date (in YYYY-MM-DD format) on the receipt.
+  If you can't find a date, provide `null` as the response.
+  
+  The receipt string is provided below:
+  
+  ```
+  [[ receipt_string ]]
+  ```
+  
+  Extract the date of this receipt using your knowledge of the industry and the receipt itself.
+
+extract_receipt_total_amount: >
+  You are an experience cashier who is trying to make sense of a receipt string that a computing system has run OCR on.
+  
+  You are trying to identify the total amount on the receipt, as well as the three letter currency code (ISO 4217).
+  If you cannot find the total amount, provide '0' as the total amount.
+  
+  The receipt string is provided below:
+  
+  ```
+  [[ receipt_string ]]
+  ```
+  
+  Extract the currency and amount of the total in this receipt using your knowledge of the industry
+  and the receipt itself.
+
+extract_receipt_tax_amount: >
+  You are an experience cashier who is trying to make sense of a receipt string that a computing system has run OCR on.
+  
+  You are trying to identify the overall tax amount on the receipt, as well as the three letter currency code (ISO 4217).
+  If you cannot find the tax amount, provide '0' for the tax amount.
+  
+  The receipt string is provided below:
+  
+  ```
+  [[ receipt_string ]]
+  ```
+  
+  Extract the currency and amount of the overall tax in this receipt using your knowledge of the industry
+  and the receipt itself.
+
+extract_receipt_tip_amount: >
+  You are an experience cashier who is trying to make sense of a receipt string that a computing system has run OCR on.
+  
+  You are trying to identify the tip paid (including gratuity, but not tax) on the receipt, as well as the three letter
+  currency code (ISO 4217). If there is no tip, provide '0' as the tip.
+  
+  The receipt string is provided below:
+  
+  ```
+  [[ receipt_string ]]
+  ```
+  
+  Extract the currency and amount of the overall tip in this receipt using your knowledge of the industry
+  and the receipt itself.
+
+extract_receipt_items: >
+  You are an experience cashier who is trying to make sense of a receipt string that a computing system has run OCR on.
+  
+  You are trying to identify each of the items present, and the amount paid for those items.
+  
+  The receipt string is provided below:
+  
+  ```
+  [[ receipt_string ]]
+  ```
+  
+  Extract a list of items by their name, currency (3 letter code) and amount paid for it using your knowledge of the industry
+  and the receipt itself.
