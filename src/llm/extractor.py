@@ -86,7 +86,7 @@ class LLMExtractor:
             "extract_receipt_tax",
         ],
         key_to_extract: str | None = None,
-    ) -> Amount: ...
+    ) -> float: ...
     @overload
     def extract_fields(
         self,
@@ -108,7 +108,7 @@ class LLMExtractor:
             "extract_receipt_items",
         ],
         key_to_extract: str | None = None,
-    ) -> str | Amount | list[ItemizedAmounts]:
+    ) -> str | float | list[ItemizedAmounts] | Any:
         messages: list[Message] = [
             {
                 "role": "system",
