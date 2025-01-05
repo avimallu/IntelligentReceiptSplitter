@@ -342,6 +342,7 @@ class SplitAIApp:
                         self.total_amount = gr.Number(
                             interactive=True,
                             label="Total",
+                            minimum=0,
                             min_width=20,
                             visible=False,
                             precision=2,
@@ -350,12 +351,14 @@ class SplitAIApp:
                             interactive=True,
                             label="Tip",
                             min_width=20,
+                            minimum=0,
                             visible=False,
                             precision=2,
                         )
                         self.tax_amount = gr.Number(
                             interactive=True,
                             label="Tax",
+                            minimum=0,
                             min_width=20,
                             visible=False,
                             precision=2,
@@ -396,8 +399,8 @@ class SplitAIApp:
                         info="If unchecked, will split equally.",
                         interactive=True,
                     )
-                    self.add_cashback_discount = gr.Slider(
-                        minimum=0, maximum=25, value=0, step=0.5,
+                    self.add_cashback_discount = gr.Number(
+                        minimum=0, maximum=100, value=0, step=0.5,
                         label="Cashback discount to apply on total",
                         info="Choose a number between 0% and 100%.",
                         interactive=True,
