@@ -1,6 +1,7 @@
 from datetime import datetime
 from typing import Literal, TypedDict, TypeVar
 
+import argparse as agp
 import gradio as gr
 import polars as pl
 from PIL.Image import Image
@@ -526,22 +527,20 @@ class SplitAIApp:
         image: Image,
         items: gr.State,
     ):  # -> gr.State:
-        # gr.Info("Running OCR on image of receipt.")
-        # receipt_string = self.receipt_reader.get_ordered_text(image)
-        # gr.Info("Extracting components. Please be patient.")
-        # receipt_extracted = self.receipt_reader.extract_components(receipt_string)
-        receipt_extracted = {
-            "merchant": "FUBAR",
-            "receipt_date": datetime.now(),
-            "total": {"amount": 15},
-            "tip": {"amount": 0},
-            "tax": {"amount": 3},
-            "item_amounts": [
-                {"name": "PET TOY", "currency": "$", "amount": 2},
-                {"name": "FLOPPY PUPPY", "currency": "$", "amount": 4},
-                {"name": "SSSUPREME S", "currency": "$", "amount": 6},
-            ],
-        }
+        receipt_string = self.receipt_reader.get_ordered_text(image)
+        receipt_extracted = self.receipt_reader.extract_components(receipt_string)
+        # receipt_extracted = {
+        #     "merchant": "FUBAR",
+        #     "receipt_date": datetime.now(),
+        #     "total": {"amount": 15},
+        #     "tip": {"amount": 0},
+        #     "tax": {"amount": 3},
+        #     "item_amounts": [
+        #         {"name": "PET TOY", "currency": "$", "amount": 2},
+        #         {"name": "FLOPPY PUPPY", "currency": "$", "amount": 4},
+        #         {"name": "SSSUPREME S", "currency": "$", "amount": 6},
+        #     ],
+        # }
         key_value_updates = [
             {
                 "component": self.merchant,
@@ -593,7 +592,13 @@ class SplitAIApp:
         else:
             self.demo.queue().launch()
 
+def arg_parser() -> agp.ArgumentParser:
+    ag = agp.ArgumentParser()
+    ag.add_argument("-m", "--model", type=str, default="qwen2.5:7b", help="Choose the LLM model used.")
+    return ag
+
 
 if __name__ == "__main__":
-    demo = SplitAIApp("qwen2.5")
+    args = arg_parser().parse_args()
+    demo = SplitAIApp(args.model)
     demo.launch(True)

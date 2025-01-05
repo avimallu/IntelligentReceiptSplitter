@@ -46,9 +46,9 @@ class ItemizedAmounts(TypedDict):
 class ReceiptExtracted(TypedDict):
     merchant: str
     receipt_date: datetime
-    total_amount: Amount
-    tip_amount: Amount
-    tax_amount: Amount
+    total: Amount
+    tip: Amount
+    tax: Amount
     item_amounts: list[ItemizedAmounts]
 
 class LLMExtractor:
@@ -165,19 +165,13 @@ class LLMExtractor:
         itemized_amounts = self.get_chat_response(messages, ReceiptItemized)['ItemizedReceipt']
         return itemized_amounts
 
-    def forward(self, receipt_string, enable_alerts:bool=False) -> ReceiptExtracted:
+    def forward(self, receipt_string) -> ReceiptExtracted:
         merchant = self.extract_merchant_name(receipt_string)
-        # gr.Info("Extracted merchant name.")
         receipt_date = self.extract_receipt_date(receipt_string)
-        # gr.Info("Extracted receipt date.")
         total_amount = self.extract_receipt_total_amount(receipt_string)
-        # gr.Info("Extracted total amount.")
         tip_amount = self.extract_receipt_tip_amount(receipt_string)
-        # gr.Info("Extracted tip amount.")
         tax_amount = self.extract_receipt_tax_amount(receipt_string)
-        # gr.Info("Extracted tax amount. Extracting individual items - this will take time.")
         item_amounts = self.extract_receipt_items(receipt_string)
-        # gr.Info("Extracted individual items. Populating items now!")
         return {
             "merchant": merchant,
             "receipt_date": receipt_date,
@@ -186,11 +180,3 @@ class LLMExtractor:
             "tax": tax_amount,
             "item_amounts": item_amounts
         }
-        # return {
-        #     "merchant": self.extract_merchant_name(receipt_string),
-        #     "receipt_date": self.extract_receipt_date(receipt_string),
-        #     "total": self.extract_receipt_total_amount(receipt_string),
-        #     "tip": self.extract_receipt_tip_amount(receipt_string),
-        #     "tax": self.extract_receipt_tax_amount(receipt_string),
-        #     "item_amounts": self.extract_receipt_items(receipt_string)
-        # }
