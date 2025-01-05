@@ -4,7 +4,7 @@ Tired of overpaying just because splitting the bill equally was easier? Now, pay
 
 Know Python? Then read on to run it locally.
 
-Don't know Python? Watch this space.
+Don't know enough Python? Watch this space.
 
 ## Screenshots
 
@@ -53,7 +53,27 @@ By default, it should run at `0.0.0.0:7860`. If you want to run this on a mobile
 http://<machine-ip-address>:7860/
 ```
 
-## Other stuff
+# Other stuff
+
+## How it works
+
+Creating an LLM app that is actually useful is rather hard - LLMs are notoriously overconfident when wrong. Not to mention, a major provider is likely to store the conversations you have with it. This is an attempt to work around these limitations by:
+
+1. **Performing Optical Character Recognition (OCR) on images to extract text.** OCR frameworks aren't generative models, so they are far less likely to go wrong. This avoids the unreliability of LLMs.
+2. **Using LLMs as an Intelligent Document Processing (IDP) layer to extract relevant fields from the OCR'd receipt text.** LLMs are great for this - getting the right context around text the same way a human would. This is also done entirely locally, by using `ollama` and downloaded weights (the default is a 7B model, which can run on machines with as little as 16GB RAM).
+3. **Incorporating a Human-in-the-Loop workflow to verify uncertain data extractions.** A human - you, will be provided a UI to correct any unreliable data the LLM may have extracted in Step (2), and configure exactly how you want to split the receipt.
+
+Hope you find this useful!
+
+## Thanks
+
+This web-app uses the following components aside from Gradio:
+
+1. [`surya`](https://github.com/VikParuchuri/surya) for OCR capabilities.
+2. [`ollama`](https://github.com/ollama/ollama) for running LLMs locally.
+3. All LLMs providers that open sourced their weights.
+
+## FAQ
 
 > Did you know that the abbreviation IRS conflicts with the Internal Revenue Service?
 
