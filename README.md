@@ -8,9 +8,9 @@ Don't know Python? Watch this space.
 
 ## Screenshots
 
-<img src="/assets/images/screenshot_1.jpg" width=15%>
-<img src="/assets/images/screenshot_2.jpg" width=15%>
-<img src="/assets/images/screenshot_3.jpg" width=15%>
+<img src="/assets/images/Screenshot_1.jpg" width=15%>
+<img src="/assets/images/Screenshot_2.jpg" width=15%>
+<img src="/assets/images/Screenshot_3.jpg" width=15%>
 
 ## Setup environment
 
