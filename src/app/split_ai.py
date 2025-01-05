@@ -1,4 +1,4 @@
-from src.llm.ollama import LLMExtractor, ReceiptExtracted
+from src.llm.extractor import LLMExtractor, ReceiptExtracted
 from src.ocr.surya import SuryaOCR
 from PIL.Image import Image
 

@@ -1,4 +1,4 @@
-from src.llm.ollama import LLMExtractor
+from src.llm.extractor import LLMExtractor
 from datetime import date
 
 

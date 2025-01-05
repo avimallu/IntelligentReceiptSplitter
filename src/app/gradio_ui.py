@@ -529,12 +529,13 @@ class SplitAIApp:
     ):  # -> gr.State:
         receipt_string = self.receipt_reader.get_ordered_text(image)
         receipt_extracted = self.receipt_reader.extract_components(receipt_string)
+        print(receipt_extracted)
         # receipt_extracted = {
         #     "merchant": "FUBAR",
         #     "receipt_date": datetime.now(),
-        #     "total": {"amount": 15},
-        #     "tip": {"amount": 0},
-        #     "tax": {"amount": 3},
+        #     "total": 15,
+        #     "tip": 0,
+        #     "tax": 3,
         #     "item_amounts": [
         #         {"name": "PET TOY", "currency": "$", "amount": 2},
         #         {"name": "FLOPPY PUPPY", "currency": "$", "amount": 4},
@@ -556,21 +557,21 @@ class SplitAIApp:
             {
                 "component": self.total_amount,
                 "kwargs": {
-                    "value": receipt_extracted["total"]["amount"],
+                    "value": receipt_extracted["total"],
                     "visible": True,
                 },
             },
             {
                 "component": self.tip_amount,
                 "kwargs": {
-                    "value": receipt_extracted["tip"]["amount"],
+                    "value": receipt_extracted["tip"],
                     "visible": True,
                 },
             },
             {
                 "component": self.tax_amount,
                 "kwargs": {
-                    "value": receipt_extracted["tax"]["amount"],
+                    "value": receipt_extracted["tax"],
                     "visible": True,
                 },
             },
@@ -581,7 +582,7 @@ class SplitAIApp:
         ]
         items += [
             {"name": x["name"], "amount": x["amount"]}
-            for x in receipt_extracted["item_amounts"]
+            for x in receipt_extracted["receipt_items"]
         ]
         out += [items]
         return out
