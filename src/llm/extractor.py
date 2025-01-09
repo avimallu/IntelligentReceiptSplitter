@@ -1,26 +1,29 @@
 import json
-from datetime import datetime
 from pathlib import Path
-from typing import Any, Type, Literal, overload, Callable
+from typing import Any, Callable, Literal, Type, overload
 
 import yaml
 from ollama import chat
 from pydantic import BaseModel
 
 from src.llm.models import (
+    ItemizedAmounts,
     Message,
     ReceiptAmount,
-    Amount,
     ReceiptDate,
     ReceiptExtracted,
     ReceiptItemized,
-    ItemizedAmounts,
     ReceiptMerchant,
 )
 
 
 class LLMExtractor:
-    def __init__(self, model: str, prompt_path: str | Path = "./src/llm/prompts.yaml", chat_function: Callable = chat):
+    def __init__(
+        self,
+        model: str,
+        prompt_path: str | Path = "./src/llm/prompts.yaml",
+        chat_function: Callable = chat,
+    ):
         """
 
         Args:
@@ -51,7 +54,9 @@ class LLMExtractor:
         response = self.chat_function(
             model=self.model,
             messages=messages,
-            format=structured_output_format.model_json_schema(),
+            format=structured_output_format.model_json_schema()
+            if structured_output_format is not None
+            else None,
             options={"temperature": 0},
         )
         message = response.message.content
@@ -75,8 +80,8 @@ class LLMExtractor:
         receipt_str: str,
         structured_response_model: Type[BaseModel],
         prompt_name: Literal[
-            "extract_merchant",
-            "extract_receipt_date",
+            "merchant",
+            "receipt_date",
         ],
         key_to_extract: str | None = None,
     ) -> str: ...
@@ -86,19 +91,19 @@ class LLMExtractor:
         receipt_str: str,
         structured_response_model: Type[BaseModel],
         prompt_name: Literal[
-            "extract_receipt_total",
-            "extract_receipt_tip",
-            "extract_receipt_tax",
+            "total",
+            "tip",
+            "tax",
         ],
         key_to_extract: str | None = None,
-        default_value: Any = None
+        default_value: Any = None,
     ) -> float: ...
     @overload
     def extract_fields(
         self,
         receipt_str: str,
         structured_response_model: Type[BaseModel],
-        prompt_name: Literal["extract_receipt_items"],
+        prompt_name: Literal["receipt_items"],
         key_to_extract: str | None = None,
         default_value: Any = None,
     ) -> list[ItemizedAmounts]: ...
@@ -107,12 +112,12 @@ class LLMExtractor:
         receipt_str: str,
         structured_response_model: Type[BaseModel],
         prompt_name: Literal[
-            "extract_merchant",
-            "extract_receipt_date",
-            "extract_receipt_total",
-            "extract_receipt_tip",
-            "extract_receipt_tax",
-            "extract_receipt_items",
+            "merchant",
+            "receipt_date",
+            "total",
+            "tip",
+            "tax",
+            "receipt_items",
         ],
         key_to_extract: str | None = None,
         default_value: Any = None,
