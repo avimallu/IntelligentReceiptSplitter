@@ -18,7 +18,7 @@ Don't know enough Python? Watch this space.
 
 ### Prerequisites
 
-You will need [`ollama`](https://ollama.com/) installed and running with a model of your choice available. The default is `qwen2.5:7b`, while this is easily configurable.
+You will need [`ollama`](https://ollama.com/) installed and running with a model of your choice available. The default is `qwen2.5:7b`, while this is easily configurable you don't really need a more powerful model.
 
 ### Python virtual environment
 
@@ -41,13 +41,19 @@ export PYTHONPATH=$(pwd)
 
 ## Start the Gradio app
 
+> Note: the long-term intent is to move away from Gradio.
+
 If everything's setup properly in the virtual environment, run:
 
 ```bash
 python src/app/gradio_ui.py
 ```
 
-By default, it should run at `0.0.0.0:7860`. If you want to run this on a mobile device while processing on your local machine, you will need to identify the IP address of your machine and be connected to the same network the machine is on. Then, in your mobile browser, navigate to:
+By default, it should run at `0.0.0.0:7860`.
+
+## Accessing on a mobile device
+
+If you want to run this on a mobile device while processing on your computer, you will need to identify the IP address of your machine and be connected to the same network the machine is on. Then, in your mobile browser, navigate to:
 
 ```commandline
 http://<machine-ip-address>:7860/
@@ -61,7 +67,7 @@ Creating an LLM app that is actually useful is rather hard - LLMs are notoriousl
 
 1. **Performing Optical Character Recognition (OCR) on images to extract text.** OCR frameworks aren't generative models, so they are far less likely to go wrong. This avoids the unreliability of LLMs.
 2. **Using LLMs as an Intelligent Document Processing (IDP) layer to extract relevant fields from the OCR'd receipt text.** LLMs are great for this - getting the right context around text the same way a human would. This is also done entirely locally, by using `ollama` and downloaded weights (the default is a 7B model, which can run on machines with as little as 16GB RAM).
-3. **Incorporating a Human-in-the-Loop workflow to verify uncertain data extractions.** A human - you, will be provided a UI to correct any unreliable data the LLM may have extracted in Step (2), and configure exactly how you want to split the receipt.
+3. **Incorporating a Human-in-the-Loop workflow to verify uncertain data extractions.** A human - you, will be provided a UI to correct any unreliable data the LLM may have extracted in Step (2), and configure exactly how you want to split the receipt. Of course, there isn't much of a formal *loop* here, but the concept still stands.
 
 Hope you find this useful!
 
