@@ -11,6 +11,7 @@ from src.app.utils import css_code, head_html, spinner_html
 
 ComponentType = TypeVar("ComponentType")
 
+
 def calculate_splits(
     item_names: list[str],
     item_people: list[list[str]],
@@ -22,7 +23,7 @@ def calculate_splits(
     tip_split_proportionally: bool,
     tax_split_proportionally: bool,
     cashback_discount: float,
-    return_detailed_table: bool = False
+    return_detailed_table: bool = False,
 ) -> gr.DataFrame:
     """
     A simple, but long function to calculate splits for a provided receipt.
@@ -84,13 +85,17 @@ def calculate_splits(
                 split_subtotals, split_tips, split_taxes
             )
         ]
-        split_cashback = [
-            - x * cashback_discount for x in split_totals_pre_cashback
-        ]
+        split_cashback = [-x * cashback_discount for x in split_totals_pre_cashback]
         split_totals_post_cashback = [
             x * (1 - cashback_discount) for x in split_totals_pre_cashback
         ]
-        first_col_names = list(item_names) + ["Subtotal", "Tip", "Tax", "Cashback", "Total"]
+        first_col_names = list(item_names) + [
+            "Subtotal",
+            "Tip",
+            "Tax",
+            "Cashback",
+            "Total",
+        ]
         splits = split_amounts + [
             split_subtotals,
             split_tips,
@@ -126,10 +131,11 @@ def calculate_splits(
             return gr.DataFrame(full_calculation_df, visible=True)
         else:
             simple_calculation = (
-                full_calculation_df
-                .filter(pl.col("Item").eq("Total"))
+                full_calculation_df.filter(pl.col("Item").eq("Total"))
                 .select(pl.exclude("Total"))
-                .transpose(include_header=True, header_name="Person", column_names=["Split"])
+                .transpose(
+                    include_header=True, header_name="Person", column_names=["Split"]
+                )
                 .filter(pl.col("Person").ne("Item"))
             )
             return gr.DataFrame(simple_calculation, visible=True)
@@ -264,7 +270,9 @@ class SplitAIApp:
         return calculate_splits(**kwargs)
 
     @staticmethod
-    def update_component_attributes(component: ComponentType, **kwargs) -> ComponentType:
+    def update_component_attributes(
+        component: ComponentType, **kwargs
+    ) -> ComponentType:
         """
         This requirement is in place because Gradio expects you to provide A NEW INSTANCE of
         the component that you want to update with its attributes changed. It seems like it
@@ -401,7 +409,10 @@ class SplitAIApp:
                         interactive=True,
                     )
                     self.add_cashback_discount = gr.Number(
-                        minimum=0, maximum=100, value=0, step=0.5,
+                        minimum=0,
+                        maximum=100,
+                        value=0,
+                        step=0.5,
                         label="Cashback discount to apply on total",
                         info="Choose a number between 0% and 100%.",
                         interactive=True,
@@ -444,7 +455,9 @@ class SplitAIApp:
                             outputs=self.display_result,
                         )
 
-                        add_item_button = gr.Button("➕", variant="secondary", scale=1, min_width=10)
+                        add_item_button = gr.Button(
+                            "➕", variant="secondary", scale=1, min_width=10
+                        )
 
                         def add_item(
                             items: list[Item],
@@ -593,9 +606,16 @@ class SplitAIApp:
         else:
             self.demo.queue().launch()
 
+
 def arg_parser() -> agp.ArgumentParser:
     ag = agp.ArgumentParser()
-    ag.add_argument("-m", "--model", type=str, default="qwen2.5:7b", help="Choose the LLM model used.")
+    ag.add_argument(
+        "-m",
+        "--model",
+        type=str,
+        default="qwen2.5:7b",
+        help="Choose the LLM model used.",
+    )
     return ag
 
 

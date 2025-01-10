@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import date
 from pathlib import Path
 from typing import Annotated, Literal, Optional, TypedDict
 
@@ -18,7 +18,7 @@ class ReceiptMerchant(BaseModel):
 
 
 class ReceiptDate(BaseModel):
-    date: datetime
+    date: date
 
 
 class ReceiptAmount(BaseModel):
@@ -48,7 +48,7 @@ class ItemizedAmounts(TypedDict):
 
 class ReceiptExtracted(TypedDict):
     merchant: str
-    receipt_date: datetime
+    receipt_date: date
     total: Amount
     tip: Amount
     tax: Amount
