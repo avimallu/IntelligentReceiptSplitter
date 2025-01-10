@@ -9,8 +9,8 @@ Don't know enough Python? Watch this space.
 ## Screenshots
 
 <p float="left">
-<img src="/assets/images/Screenshot_1.jpg" width=15%>
-<img src="/assets/images/Screenshot_2.jpg" width=15%>
+<img src="/assets/images/Screenshot_1.jpg" width=14%>
+<img src="/assets/images/Screenshot_2.jpg" width=12.5%>
 <img src="/assets/images/Screenshot_3.jpg" width=15%>
 </p>
 
@@ -18,7 +18,9 @@ Don't know enough Python? Watch this space.
 
 ### Prerequisites
 
-You will need [`ollama`](https://ollama.com/) installed and running with a model of your choice available. The default is `qwen2.5:7b`, while this is easily configurable you don't really need a more powerful model.
+You will need [`ollama`](https://ollama.com/) installed and running with a model of your choice available.
+
+The default is `tulu3:8b`, while this is easily configurable you don't really need a more powerful model. If you have the compute, then use `gemma2:27b` for higher accuracy. If you would like to choose, run `pytest` and choose the ones that pass enough of the extraction tests.
 
 ### Python virtual environment
 
