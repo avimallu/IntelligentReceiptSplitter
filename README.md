@@ -86,3 +86,9 @@ This web-app uses the following components aside from Gradio:
 > Did you know that the abbreviation IRS conflicts with the Internal Revenue Service?
 
 Yes.
+
+> What are the limitations?
+
+1. Receipts need to be horizontally aligned to be read correctly by OCR.
+2. The smaller the LLM, the more mistakes it will make. Since the LLM makes only one pass at reading the receipt data in favor of speed, there are no internal feedback loops like Chain-of-Thought or Prover-Verifier implemented.
+3. You're a bit out of luck if you don't know how to use a bit of Python. This is being worked on, but progress will be slow. The easiest way out would be to convert both the OCR and the LLM calls to using paid or free APIs, but it becomes harder to ensure that everything stays on-device.
