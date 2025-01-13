@@ -5,11 +5,11 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
-    "gradio>=5.9.1",
     "great-tables>=0.15.0",
     "more-itertools>=10.5.0",
     "ollama>=0.4.4",
     "polars>=1.18.0",
+    "reflex>=0.6.8",
     "selenium>=4.27.1",
     "surya-ocr>=0.8.1",
 ]
